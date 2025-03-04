@@ -9,6 +9,7 @@ This is a Django project for managing tasks. It includes functionality for creat
 - Python 3.x
 - Django 3.x
 - PHPMYSQl (updated version, activate apache and mysql)
+- mysqlclient
 
 
 
@@ -17,13 +18,13 @@ This is a Django project for managing tasks. It includes functionality for creat
 1. **Clone the repository**:
     ```bash
     git clone https://github.com/nestyy315/DjangoProject.git
-    cd task-manager
+    cd task_manager
     ```
 
 2. **Create a virtual environment**:
     ```bash
     python -m venv env
-    source env/bin/activate   # On Windows, use `env\Scripts\activate`
+    env\Scripts\activate
     ```
 
 3. **Set up the database**:
@@ -38,7 +39,7 @@ This is a Django project for managing tasks. It includes functionality for creat
     ```
 
 5. **Access the application**:
-    Open your web browser and go to `http://127.0.0.1:8000/`.
+    Open your web browser and go to http://127.0.0.1:8000/tasks/
 
 
 

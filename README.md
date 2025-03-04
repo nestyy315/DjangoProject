@@ -16,7 +16,7 @@ This is a Django project for managing tasks. It includes functionality for creat
 
 1. **Clone the repository**:
     ```bash
-    git clone https://github.com/your-username/task-manager.git
+    git clone https://github.com/nestyy315/DjangoProject.git
     cd task-manager
     ```
 

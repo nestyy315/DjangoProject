@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% if task %}Edit Task{% else %}Create Task{% endif %}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+
+        div.container {
+            max-width: 600px;
+            height: auto;
+            margin: 0 auto;
+            padding: 30px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            font-size: 2rem;
+            color: #007bff;
+            margin-bottom: 30px;
+        }
+
+        .form-label {
+            font-weight: bold;
+            color: #333;
+        }
+
+        .form-control {
+            border-radius: 0.375rem;
+            box-shadow: none;
+            border: 1px solid #ced4da;
+            transition: border-color 0.3s;
+        }
+
+        .form-control:focus {
+            border-color: #007bff;
+            box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.25);
+        }
+
+        .btn {
+            border-radius: 0.375rem;
+            font-size: 1rem;
+            padding: 12px;
+        }
+
+        .btn-success {
+            background-color: #28a745;
+            border: none;
+        }
+
+        .btn-outline-primary {
+            border-color: #007bff;
+            color: #007bff;
+        }
+
+        .btn-outline-primary:hover {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .form-check-label {
+            font-size: 1rem;
+        }
+
+        .form-check-input:checked {
+            background-color: #28a745;
+            border-color: #28a745;
+        }
+
+        .mb-3 {
+            margin-bottom: 1.5rem;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .mt-3 {
+            margin-top: 2rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center text-primary">
+            {% if task %} Edit Task {% else %} Create Task {% endif %}
+        </h1>
+
+        <!-- Task Form -->
+        <form action="{% if task %}{% url 'task_update' task.id %}{% else %}{% url 'task_create' %}{% endif %}" method="POST">
+            {% csrf_token %}
+            
+            <div class="mb-3">
+                <label for="task_name" class="form-label">Task Name</label>
+                <input type="text" name="title" id="task_name" class="form-control" placeholder="Input Task Name" value="{% if task %}{{ task.title }}{% endif %}" required>
+            </div>
+            
+            <div class="mb-3">
+                <label for="task_description" class="form-label">Description</label>
+                <input type="text" name="description" id="task_description" class="form-control" placeholder="Description" value="{% if task %}{{ task.description }}{% endif %}">
+            </div>
+            
+            <div class="mb-3">
+                <label for="task_status" class="form-label">Status</label>
+                <input type="text" name="status" id="task_status" class="form-control" placeholder="Status" value="{% if task %}{{ task.status }}{% endif %}" disabled>
+            </div>
+            
+            <div class="mb-3">
+                <label for="task_due_date" class="form-label">Due Date</label>
+                <input type="date" name="due_date" id="task_due_date" class="form-control" value="{% if task %}{{ task.due_date|date:'Y-m-d' }}{% endif %}" required>
+            </div>
+            
+            <!-- Mark as Completed (checkbox) -->
+            {% if task %}
+            <div class="form-check mb-3">
+                <input type="checkbox" name="completed" id="completed" class="form-check-input" {% if task.status == 'completed' %}checked{% endif %}>
+                <label class="form-check-label" for="completed">Mark as Completed</label>
+            </div>
+            {% endif %}
+            
+            <div class="text-center">
+                <button type="submit" class="btn btn-success w-100">{% if task %}Update Task{% else %}Add Task{% endif %}</button>
+            </div>
+        </form>
+
+        
+        <div class="mt-3 text-center">
+            <a href="{% url 'task_list' %}" class="btn btn-outline-primary w-100">Back to Task List</a>
+        </div>
+    </div>
+
+  
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+</body>
+</html>
